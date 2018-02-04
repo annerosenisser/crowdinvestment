@@ -11,6 +11,8 @@ In this GitHub project, I'm creating an **educational shiny app that visualizes 
 <br>
 <br>
 
+**This project is still in the development phase. 2018-02-04**
+
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 
 Here's the link to the Wikipedia page on crowd funding: https://en.wikipedia.org/wiki/Crowdfunding  
