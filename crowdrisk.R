@@ -9,11 +9,11 @@
 # Each project runs over 5 years and gives a 5% interest per year. 
 # Each project has in each given year a likelihood of 10% of default of payment. 
 # To start with, let's assume for simplicity that the yearly likelihood is
-# independent from the accurance of default of payment in the preceding year. 
+# independent from the occurrance of default of payment in the preceding year. 
 
 # Note there is no compound interest (Zinseszins)!
 
-# How does the risk and expecially the expected
+# How does the risk and especially the expected
 # actual return on investment change with the number of 
 # projects invested into?? 
 
@@ -62,17 +62,21 @@ money_at_end_fun <- function(n_projects, default_likelihood, investment, years) 
     v[i] <- money_at_end
   }
   money_per_project = round(investment / n_projects, 0)
+  best_outcome <- round(max(v), 0)
+  worst_outcome <- round(min(v), 0)
   boxplot(v,
           ylim = c(0, investment*1.4), # create the same scale for all plots
           main = "money at end of investment period")
   title(xlab = paste0("number of projects: ", n_projects, 
-                      "\nmoney per project: ", money_per_project), line = 1)
+                      "\nmoney per project: ", money_per_project,
+                      "\nbest outcome: ", best_outcome, 
+                      "\nworst outcome: ", worst_outcome), line = 3)
   abline(h = mean(v), col = "red")
 }
 
 dev.off()
-par(mfrow = c(3, 2), oma = c(1, 2, 1, 2), 
-    mar = c(3, 3, 3, 3))
+par(mfrow = c(2, 3), oma = c(2, 2, 1, 2), 
+    mar = c(4, 3, 3, 3))
 
 money_at_end_fun(n_projects = 1, default_likelihood = 0.1, 
                  investment = 10000, years = 5)
