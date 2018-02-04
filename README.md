@@ -11,8 +11,11 @@ In this GitHub project, I'm creating an **educational shiny app that visualizes 
 <br>
 <br>
 
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+
 Here's the link to the Wikipedia page on crowd funding: https://en.wikipedia.org/wiki/Crowdfunding  
 
 Note that I'm only referring to debt-based crowd funding here (also called crowd lending).   
 
 My two favorite crowd funding platforms (with a focus on renewable energy and social entrepreneurship) are [Bettervest](https://www.bettervest.com/en/) and [GLS Crowd](https://www.gls-crowd.de/) (both based in Germany, but Bettervest has a focus on investing worldwide).
+
