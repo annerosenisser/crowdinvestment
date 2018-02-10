@@ -34,7 +34,7 @@ n_projects <- 1
 
 
 # Now let's assume there is a 10% default of payment each year. 
-(investment*0.05*payment_likelihood_pa*years + investment) * 100 / investment
+(investment*0.05*payment_likelihood*years + investment) * 100 / investment
 # after 5 years, the initial capital has grown to 122.5%. 
 # That's actually not that bad. 
 
@@ -45,7 +45,7 @@ n_projects <- 1
 
 # If we invest only in one project, what's the best outcome?
 # What's the worst outcome? 
-v <- numeric(100)
+v <- numeric(100) # number of simulations
 
 money_at_end_fun <- function(n_projects, default_likelihood, investment, years) {
   for (i in seq_along(v)) {
@@ -66,12 +66,18 @@ money_at_end_fun <- function(n_projects, default_likelihood, investment, years) 
   worst_outcome <- round(min(v), 0)
   boxplot(v,
           ylim = c(0, investment*1.4), # create the same scale for all plots
-          main = "money at end of investment period")
+          main = "money at end of investment period", 
+          horizontal = T)
   title(xlab = paste0("number of projects: ", n_projects, 
                       "\nmoney per project: ", money_per_project,
                       "\nbest outcome: ", best_outcome, 
                       "\nworst outcome: ", worst_outcome), line = 3)
-  abline(h = mean(v), col = "red")
+  abline(v = mean(v), col = "red") # expected/mean outcome
+  # add points for the best and worst possible outcomes: 
+  points(x = c(best_outcome, worst_outcome), y = c(1, 1), 
+         col = c("green", "red"), pch = 19)
+  # add line to show the invested capital: 
+  abline(v = investment, lty = 2) # expected/mean outcome
 }
 
 dev.off()
@@ -98,6 +104,9 @@ money_at_end_fun(n_projects = 30, default_likelihood = 0.1,
                  investment = 10000, years = 5)
 
 money_at_end_fun(n_projects = 100, default_likelihood = 0.1, 
+                 investment = 10000, years = 5)
+
+money_at_end_fun(n_projects = 150, default_likelihood = 0.1, 
                  investment = 10000, years = 5)
 
 # ROI: 
