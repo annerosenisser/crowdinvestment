@@ -1,4 +1,10 @@
 library(shiny)
+library(vioplot)
+
+# Useful resources: 
+# https://deanattali.com/blog/building-shiny-apps-tutorial/
+# https://github.com/juliasilge/intro_to_shiny/blob/master/apps/session_one_app/app.R
+
 
 # User interface
 ui <- fluidPage(
@@ -10,9 +16,9 @@ ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
-      numericInput(inputId = "n_projects", 
+      sliderInput(inputId = "n_projects", 
                    label = "Number of projects invested into:", 
-                   value = c(1, 5, 10, 20, 30, 100, 150)) 
+                   min = 1, max = 1000, value = 1) 
   ),
   
   # main panel showing the output
@@ -37,7 +43,7 @@ server <- function(input, output){
   # n_projects <- reactive({input$n_projects}) 
   
   output$plot <- renderPlot({
-    v <- numeric(100) # number of simulations
+    v <- numeric(10000) # number of simulations
     
     money_at_end_fun <- function(n_projects, default_likelihood, investment, years) {
       for (i in seq_along(v)) {
@@ -53,13 +59,14 @@ server <- function(input, output){
           investment*portfolio_success
         v[i] <- money_at_end
       }
-      money_per_project = round(investment / n_projects, 0)
+      money_per_project = round(investment / input$n_projects, 0)
       best_outcome <- round(max(v), 0)
       worst_outcome <- round(min(v), 0)
-      boxplot(v,
+      vioplot(v,
               ylim = c(0, investment*1.4), # create the same scale for all plots
               # main = "money at end of investment period", 
-              horizontal = T)
+              horizontal = T, col = "grey", 
+              drawRect = F)
 #       title(xlab = paste0("number of projects: ", n_projects, 
 #                           "\nmoney per project: ", money_per_project,
 #                           "\nbest outcome: ", best_outcome, 
